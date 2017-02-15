@@ -29,14 +29,14 @@ public class Heap<E extends Comparable<E>> implements HeapAPI<E>
    @Override
    public boolean isEmpty()
    {
-      return tree == null;
+      return tree.isEmpty();
    }
 
    @Override
-   public void insert(E obj)
+   public void insert(E item)
    {
-      tree.add(obj);
-      
+      tree.add(item);
+      reheapify(0,size());
    }
 
    @Override
@@ -45,14 +45,15 @@ public class Heap<E extends Comparable<E>> implements HeapAPI<E>
       if(tree.isEmpty())
           throw new HeapException("Heap is empty");
       E root = tree.get(0);
-      root = tree.get(size() - 1);
+      tree.add(0,tree.get(size() - 1));
+      tree.remove(size()-1);
       return reheapify(, size());
    }
 
    @Override
    public E peek() throws HeapException
    {
-      //implement this method
+
    }      
 
    @Override

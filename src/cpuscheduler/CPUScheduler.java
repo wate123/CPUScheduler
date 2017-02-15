@@ -1,5 +1,5 @@
-
 package cpuscheduler;
+import java.util.Random;
 
 /**
  * A simple non-preemptive CPU Scheduler
@@ -7,7 +7,6 @@ package cpuscheduler;
  * @since date this file was last modified
  */
 
-import java.util.Random;
 
 public class CPUScheduler
 {

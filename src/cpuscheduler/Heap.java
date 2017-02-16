@@ -45,15 +45,18 @@ public class Heap<E extends Comparable<E>> implements HeapAPI<E>
       if(tree.isEmpty())
           throw new HeapException("Heap is empty");
       E root = tree.get(0);
-      tree.add(0,tree.get(size() - 1));
+      tree.set(0,tree.get(size()-1));
       tree.remove(size()-1);
-      return reheapify(, size());
+      reheapify(0,size()-1);
+      return root;
    }
 
    @Override
    public E peek() throws HeapException
    {
-
+      if(isEmpty())
+         throw new HeapException("Heap is empty");
+      return tree.get(0);
    }      
 
    @Override
@@ -69,7 +72,10 @@ public class Heap<E extends Comparable<E>> implements HeapAPI<E>
     */
    private void swap(int place, int parent)
    {
-      
+      E tmp = tree.get(place);
+      tree.set(place,tree.get(parent));
+      tree.set(parent,tmp);
+
    }
 
    /**
@@ -79,6 +85,17 @@ public class Heap<E extends Comparable<E>> implements HeapAPI<E>
     */
    private void reheapify(int root, int eSize)
    {
-      //implement this method
+      if(root > 1){
+         int child = 2*root+1;
+         if(){
+            if(tree.get(child+1).compareTo(tree.get(child)) > 1){
+               child = child + 1;
+            }
+         }
+         if(tree.get(root).compareTo(tree.get(child)) < 1){
+            swap(root,child);
+            reheapify(child,eSize);
+         }
+      }
    }
 }

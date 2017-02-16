@@ -23,7 +23,7 @@ public class Heap<E extends Comparable<E>> implements HeapAPI<E>
    */ 
    public Heap()
    {
-      tree = null;
+      tree =  new ArrayList<E>();
    }
 
    @Override
@@ -33,22 +33,28 @@ public class Heap<E extends Comparable<E>> implements HeapAPI<E>
    }
 
    @Override
-   public void insert(E item)
+   public void insert(E obj)
    {
-      tree.add(item);
-      reheapify(0,size());
+      tree.add(obj);
+      int place = size()-1;
+      int parent = (place-1)/2;
+      while(parent >= 0 && tree.get(place).compareTo(tree.get(parent)) > 0) {
+         swap(place, parent);
+         place = parent;
+         parent = (place - 1) / 2;
+      }
    }
 
    @Override
    public E remove() throws HeapException
    {
-      if(tree.isEmpty())
+      if(isEmpty())
           throw new HeapException("Heap is empty");
-      E root = tree.get(0);
+      E temp = tree.get(0);
       tree.set(0,tree.get(size()-1));
       tree.remove(size()-1);
-      reheapify(0,size()-1);
-      return root;
+      reheapify(0,size());
+      return temp;
    }
 
    @Override
@@ -72,9 +78,9 @@ public class Heap<E extends Comparable<E>> implements HeapAPI<E>
     */
    private void swap(int place, int parent)
    {
-      E tmp = tree.get(place);
+      E temp = tree.get(place);
       tree.set(place,tree.get(parent));
-      tree.set(parent,tmp);
+      tree.set(parent,temp);
 
    }
 
@@ -87,12 +93,12 @@ public class Heap<E extends Comparable<E>> implements HeapAPI<E>
    {
       if(root > 1){
          int child = 2*root+1;
-         if(){
-            if(tree.get(child+1).compareTo(tree.get(child)) > 1){
+         if(2*root+2 < eSize-1){
+            if(tree.get(child+1).compareTo(tree.get(child)) > 0){
                child = child + 1;
             }
          }
-         if(tree.get(root).compareTo(tree.get(child)) < 1){
+         if(tree.get(root).compareTo(tree.get(child)) < 0){
             swap(root,child);
             reheapify(child,eSize);
          }

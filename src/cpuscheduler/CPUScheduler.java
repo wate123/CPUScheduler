@@ -12,7 +12,9 @@ public class CPUScheduler
 {
    public static void main(String []args) throws HeapException
    {
-      int randInt = generator.nextTint(-20,19);
-      while()
+      
+      //int randInt = generator.nextTint(-20,19);
+      //while()
+
    }
 }
